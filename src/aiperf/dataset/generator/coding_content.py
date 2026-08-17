@@ -782,7 +782,9 @@ class CodingContentGenerator(BaseGenerator):
         pool_size = self.prefix_prompts.pool_size or 0
         self._prefix_prompts = [self.generate_prompt(length) for _ in range(pool_size)]
         self.debug(
-            lambda: f"Initialized coding prefix prompts pool with {len(self._prefix_prompts)} prompts"
+            lambda: (
+                f"Initialized coding prefix prompts pool with {len(self._prefix_prompts)} prompts"
+            )
         )
 
     def get_random_prefix_prompt(self) -> str:
@@ -832,8 +834,10 @@ class CodingContentGenerator(BaseGenerator):
         while session_index >= len(self._user_context_prompts):
             self._user_context_prompts.append(self.generate_prompt(length))
             self.debug(
-                lambda: f"Generated coding user context prompt "
-                f"#{len(self._user_context_prompts) - 1}"
+                lambda: (
+                    f"Generated coding user context prompt "
+                    f"#{len(self._user_context_prompts) - 1}"
+                )
             )
         return self._user_context_prompts[session_index]
 
@@ -864,8 +868,10 @@ class CodingContentGenerator(BaseGenerator):
         text = "\n\n".join(blocks)
         self._tool_pool = self.tokenizer.encode(text)
         self.debug(
-            lambda: f"Built tool pool with {len(self._tool_pool)} tokens "
-            f"from {len(blocks)} blocks"
+            lambda: (
+                f"Built tool pool with {len(self._tool_pool)} tokens "
+                f"from {len(blocks)} blocks"
+            )
         )
 
     def _sample_tokens(self, num_tokens: int, pool: list[int]) -> list[int]:
